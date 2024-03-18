@@ -80,15 +80,16 @@ export class LiningResidues extends React.Component<{controller: Context }, Stat
                 </div>
     }
 }  
-function residueStringToResidueLight(residue:string):QueryParam{
+function residueStringToResidueLight(residue:string, focus: boolean):QueryParam{
     let residueParts = residue.split(" ");
+    console.log(residueParts);
     let rv = {
         struct_asym_id: residueParts[2],
         start_residue_number: Number(residueParts[1]),
         end_residue_number: Number(residueParts[1]),
         color:{r:255,g:0,b:255},
         sideChain: true,
-        focus: true
+        focus
     }
 
     return rv;
@@ -107,7 +108,7 @@ class Controls extends React.Component<State,{}>{
         }
 
         for(let residue of this.props.app.state.data){
-            residues.push(residueStringToResidueLight(residue));
+            residues.push(residueStringToResidueLight(residue, false));
         }
 
         await this.props.app.props.controller.visual.select({data: residues}).then(() => {
@@ -187,8 +188,7 @@ class DGBody extends React.Component<State,{}>{
     }
 
     private async selectResidue(residue:string){
-        let residueLightEntity = residueStringToResidueLight(residue);
-        await this.props.app.props.controller.visual.select({data: [residueLightEntity]});
+        let residueLightEntity = residueStringToResidueLight(residue, true);
     }
 
     private getSelect3DLink(residue:string){           
