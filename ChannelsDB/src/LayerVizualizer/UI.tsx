@@ -531,7 +531,6 @@ class InteractionMap extends React.Component<State & {controller: Context},{}>{
     private resetFocusToTunnel(){
         const loci = SelectionHelper.getSelectedChannelLoci();
         if (loci) this.props.app.props.controller.plugin.managers.camera.focusLoci(loci);
-        console.log(loci);
     }
 
     private async showLayerResidues3DAndFocus(layerIdx:number){

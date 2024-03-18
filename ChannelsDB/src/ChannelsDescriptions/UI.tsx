@@ -26,7 +26,6 @@ export class ChannelsDescriptions extends React.Component<{controller: Context }
     };
 
     componentDidMount() {
-        console.log("ChannelsDescriptions");
         const checkDataAvailability = () => {
             return this.props.controller.data as ChannelsDBData;
         };

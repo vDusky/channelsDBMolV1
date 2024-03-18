@@ -85,7 +85,6 @@ export class ResidueAnnotations extends React.Component<{controller: Context }, 
     }
 
     componentDidMount() {
-        console.log("ResidueAnnotations");
         let list = AnnotationDataProvider.getResidueList();
         if(list !== void 0){
             let state = this.state;
