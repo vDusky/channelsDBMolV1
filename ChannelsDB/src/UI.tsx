@@ -211,7 +211,7 @@ export class Selection extends React.Component<State, { label?: string|JSX.Eleme
                     </div>
                 });
             } else {
-            this.setState({ label })
+                this.setState({ label })
             }
         })
 
@@ -406,6 +406,8 @@ export class Channel extends React.Component<{state:State, channel: any }, { isV
         const channel = this.props.channel as (Tunnel & TunnelMetaInfo)
         if (!channel.__isVisible) showChannelVisuals(this.props.state.plugin, [channel], true);
         if (typeof channel.__loci !== 'undefined') this.props.state.plugin.plugin.managers.camera.focusLoci(channel.__loci);
+        if (channel) SelectionHelper.channelSelected(channel);
+        this.forceUpdate();
     }
 }
 

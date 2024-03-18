@@ -82,6 +82,11 @@ export class SelectionHelper{
         return this.selectedChannelLoci;
     }
 
+    public static channelSelected(current: (Tunnel & TunnelMetaInfo)) {
+        this.invokeOnSelectionHandlers(current.Type + " " + current.Id);
+        this.invokeOnChannelSelectHandlers(current.Layers);
+    }
+
     public static updateSelectionLabel(labels: string|string[]) {
         this.invokeOnSelectionHandlers(labels);
     }
