@@ -191,6 +191,9 @@ class DGBody extends React.Component<State,{}>{
     private async selectResidue(residue:string){
         let residueLightEntity = residueStringToResidueLight(residue, true);
         await this.props.app.props.controller.visual.select({data: [residueLightEntity], forceClear: true});
+        if (this.isBackbone(residue)) {
+            residue = residue.split(" ").splice(0, 3).join(" ");
+        }
         SelectionHelper.updateSelectionLabel(residue);
     }
 
