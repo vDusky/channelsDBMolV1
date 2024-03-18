@@ -189,6 +189,7 @@ class DGBody extends React.Component<State,{}>{
 
     private async selectResidue(residue:string){
         let residueLightEntity = residueStringToResidueLight(residue, true);
+        await this.props.app.props.controller.visual.select({data: [residueLightEntity], forceClear: true});
     }
 
     private getSelect3DLink(residue:string){           

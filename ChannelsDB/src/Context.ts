@@ -140,10 +140,10 @@ export class Context {
         this.plugin.managers.interactivity.lociHighlights.highlightOnly({ loci: EmptyLoci });
         if (this.isHighlightColorUpdated) this.visual.reset({ highlightColor: true });
     },
-    select: async (params: { data: QueryParam[], nonSelectedColor?: any, addedRepr?: boolean, structureNumber?: number }) => {
+    select: async (params: { data: QueryParam[], nonSelectedColor?: any, addedRepr?: boolean, structureNumber?: number, forceClear?: boolean }) => {
 
         // clear prvious selection
-        if (this.selectedParams) {
+        if (this.selectedParams || params.forceClear) {
             await this.visual.clearSelection(params.structureNumber);
         }
 
