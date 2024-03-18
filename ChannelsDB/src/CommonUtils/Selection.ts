@@ -82,6 +82,10 @@ export class SelectionHelper{
         return this.selectedChannelLoci;
     }
 
+    public static updateSelectionLabel(labels: string|string[]) {
+        this.invokeOnSelectionHandlers(labels);
+    }
+
     private static objectSelected(current: Representation.Loci<Loci>, plugin: Context) {
         if (current.loci.kind == "group-loci") {
             const loci = current.loci as ShapeGroup.Loci;
@@ -96,6 +100,7 @@ export class SelectionHelper{
                             this.selectedChannelData = tunnel.Layers;
                             this.invokeOnSelectionHandlers(tunnel.Type + " " + tunnel.Id);
                             this.invokeOnChannelSelectHandlers(this.selectedChannelData);
+                            // plugin.plugin.managers.interactivity.lociHighlights.highlightOnly({ loci: current.loci });
                             return;
                         }
                     })

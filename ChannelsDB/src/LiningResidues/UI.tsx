@@ -114,6 +114,7 @@ class Controls extends React.Component<State,{}>{
         await this.props.app.props.controller.visual.select({data: residues}).then(() => {
             PluginCommands.Camera.Reset(this.props.app.props.controller.plugin, {});
         });
+        SelectionHelper.updateSelectionLabel(this.props.app.state.data);
     }
 
     render(){
@@ -190,6 +191,7 @@ class DGBody extends React.Component<State,{}>{
     private async selectResidue(residue:string){
         let residueLightEntity = residueStringToResidueLight(residue, true);
         await this.props.app.props.controller.visual.select({data: [residueLightEntity], forceClear: true});
+        SelectionHelper.updateSelectionLabel(residue);
     }
 
     private getSelect3DLink(residue:string){           
