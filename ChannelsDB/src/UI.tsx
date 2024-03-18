@@ -203,8 +203,16 @@ export class Selection extends React.Component<State, { label?: string|JSX.Eleme
     private observer: Subscription;
     private observerChannels: Subscription;
     componentWillMount() {           
-        SelectionHelper.attachOnSelect((label: string) => {
+        SelectionHelper.attachOnSelect((label: string|string[]) => {
+            if (Array.isArray(label)) {
+                this.setState({
+                    label: <div className="columns">
+                        {label.map(element => (<div>{element}</div>))}
+                    </div>
+                });
+            } else {
             this.setState({ label })
+            }
         })
 
         this.observer = this.props.plugin.plugin.behaviors.interaction.click.subscribe(({current, button, modifiers}) => {

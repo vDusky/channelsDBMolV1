@@ -1,4 +1,4 @@
-import { Tunnel, Layers } from "../DataInterface";
+import { Tunnel, Layers, TunnelMetaInfo } from "../DataInterface";
 import { Context } from "../Context";
 import { Representation } from "molstar/lib/mol-repr/representation";
 import { Loci } from "molstar/lib/mol-model/loci";
@@ -23,10 +23,10 @@ export class SelectionHelper{
     private static selectedChannelData: Layers|undefined;
     private static selectedChannelLoci: ShapeGroup.Loci|undefined;
 
-    private static onSelectionHandlers:{handler:(label:string)=>void}[];
+    private static onSelectionHandlers:{handler:(label:string|string[])=>void}[];
     private static onChannelSelectHandlers:{handler:(data:Layers)=>void}[];
 
-    public static attachOnSelect(handler:(label: string)=>void) {
+    public static attachOnSelect(handler:(label: string|string[])=>void) {
         if(this.onSelectionHandlers===void 0){
             this.onSelectionHandlers = [];
         }
@@ -34,7 +34,7 @@ export class SelectionHelper{
         this.onSelectionHandlers.push({handler});
     }
 
-    private static invokeOnSelectionHandlers(label:string){
+    private static invokeOnSelectionHandlers(label:string|string[]){
         if(this.onSelectionHandlers === void 0){
             return;
         }
